@@ -14,8 +14,12 @@ module.exports = {
       {
         test: /\.css$/,
         // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }], // 完整写法
-        use: ["style-loader", "css-loader"] // 简写一
+        use: ['style-loader', 'css-loader'], // 简写一
         // loader: "css-loader" // 简写二 只用一个 loader
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
