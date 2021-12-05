@@ -130,3 +130,144 @@ import "css-loader!../css/index.css";
 
   - loader属性： Rule.use: [ { loader } ] 的简写。
 
+**loader 的执行顺序是从右至左的**
+
+##### css-loader
+
+> 处理 css 文件
+
+> 完整写法、简写一、二
+
+```json
+module: {
+    rules: [
+      {
+        test: /\.css$/,
+        // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }], // 完整写法，可以加 options
+        use: ["style-loader", "css-loader"] // 简写一
+        // loader: "css-loader" // 简写二 只能用一个 loader
+      },
+    ],
+  },
+```
+
+##### style-loader
+
+> 我们已经可以通过css-loader来加载css文件了 
+
+- 但是你会发现这个css在我们的代码中并没有生效（页面没有效果）。
+
+> 这是为什么呢？把 css 通过内联样式插入，**添加一个 style 标签**
+
+- 因为css-loader只是负责将.css文件进行解析，并不会将解析之后的css插入到页面中； 
+- 如果我们希望再完成插入style的操作，那么我们还需要另外一个loader，就是style-loader；
+
+##### less文件的处理 less 和 less-loader
+
+- 使用 less 工具处理 .less 文件
+
+```shell
+npm install less -D
+```
+
+```shell
+less ./component.less > component.css # 生成 css 文件
+```
+
+- 使用 less-loader
+
+> less-loader 会自动使用 less 工具
+
+```shell
+npm install less-loader --dev
+```
+
+```json
+{
+    test: /\.less$/,
+    use: ['style-loader', 'css-loader', 'less-loader'],
+}
+```
+
+### 浏览器的兼容性
+
+- 我们来思考一个问题：开发中，浏览器的兼容性问题，我们应该如何去解决和处理？ 
+  - 当然这个问题很笼统，这里我说的兼容性问题不是指屏幕大小的变化适配； 
+  - 我这里指的兼容性是针对不同的浏览器支持的特性：比如css特性、js语法，之间的兼容性；
+
+- 我们知道市面上有大量的浏览器： 
+
+  - 有Chrome、Safari、IE、Edge、Chrome for Android、UC Browser、QQ Browser等等； 
+
+  - 它们的市场占率是多少？我们要不要兼容它们呢？
+
+- 其实在很多的脚手架配置中，都能看到类似于这样的配置信息： 
+
+  - 这里的百分之一，就是指市场占有率
+
+```
+> 1%
+last 2 versions
+not dead
+```
+
+市场占有率可以在这里查询
+
+- https://caniuse.com/usage-table
+
+#### browserlist工具
+
+- 但是有一个问题，我们如何可以在css兼容性和js兼容性下共享我们配置的兼容性条件呢？ 
+  - 就是当我们设置了一个条件： > 1%； 
+  - 我们表达的意思是css要兼容市场占有率大于1%的浏览器，js也要兼容市场占有率大于1%的浏览器； 
+  - 如果我们是通过工具来达到这种兼容性的，比如后面我们会讲到的postcss-prest-env、babel、autoprefixer等
+- 如何可以让他们共享我们的配置呢？ 
+  - 这个问题的答案就是Browserslist；
+- Browserslist是什么？Browserslist是一个在不同的前端工具之间，共享目标浏览器和Node.js版本的配置：
+  - Autoprefixer
+  - Babel
+  - postcss-preset-env
+  - eslint-plugin-compat
+  - stylelint-no-unsupported-browser-features
+  - postcss-normalize
+  - obsolete-webpack-plugin
+
+#### 浏览器的查询过程
+
+- 我们可以编写类似这样的配置
+
+```
+> 1%
+lase 2 versions
+not dead
+```
+
+- 那么之后，这些工具会根据我们的配置来获取相关的浏览器信息，以方便决定是否需要进行兼容性的支持： 
+  - 条件查询使用的是`caniuse-lite`的工具，这个工具的数据来自于`caniuse`的网站上；
+
+#### 命令行使用 browserslist工具
+
+```shell
+ npx browserslist "> 1%, last 2 versions, not dead"
+```
+
+#### 配置browserslist
+
+- 在 package.json 中配置
+
+```json
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+```
+
+- `.browserslist`文件
+
+```
+> 1%
+last 2 versions
+not dead
+```
+
