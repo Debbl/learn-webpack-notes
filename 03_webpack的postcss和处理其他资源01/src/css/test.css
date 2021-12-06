@@ -3,6 +3,7 @@
 }
 
 .content {
+    color: #12345678;
     user-select: none;
     transition: all 2s ease;
 }

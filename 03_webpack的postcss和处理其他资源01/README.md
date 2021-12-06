@@ -88,3 +88,29 @@ module.exports = {
 
 ```
 
+## postcss-preset-env
+
+- 事实上，在配置postcss-loader时，我们配置插件并不需要使用autoprefixer。 
+- 我们可以使用另外一个插件：postcss-preset-env 
+  - postcss-preset-env也是一个postcss的插件； 
+  - 它可以帮助我们将一些现代的CSS特性，转成大多数浏览器认识的CSS，并且会根据目标浏览器或者运行时环 境添加所需的polyfill；
+  - 也包括会自动帮助我们添加autoprefixer（**所以相当于已经内置了autoprefixer**）；
+
+- 首先，我们需要安装postcss-preset-env
+
+```shell
+npm install postcss-preset-env -D
+```
+
+- 之后，我们直接修改掉之前的autoprefixer即可
+
+> postcss.config.js
+
+```shell
+module.exports = {
+  plugins: [
+    require('postcss-preset-env')
+  ]
+}
+```
+
