@@ -182,7 +182,7 @@ npm install file-loader -D
       }
 ```
 
-### 文件的名称规则
+#### 文件的名称规则
 
 - 有时候我们处理后的文件名称按照一定的规则进行显示： 
   - 比如保留原来的文件名、扩展名，同时为了防止重复，包含一个hash值等；
@@ -196,7 +196,7 @@ npm install file-loader -D
   - [hash:<length>]：截图hash的长度，默认32个字符太长了； 
   - [path]：文件相对于webpack配置文件的路径；
 
-### 设置文件名称
+#### 设置文件名称
 
 ```js
 {
@@ -210,7 +210,7 @@ npm install file-loader -D
 }
 ```
 
-### 设置文件的存放路径
+#### 设置文件的存放路径
 
 - 当然，我们刚才通过 img/ 已经设置了文件夹，这个也是vue、react脚手架中常见的设置方式： 
   - 其实按照这种设置方式就可以了； 
@@ -224,6 +224,38 @@ npm install file-loader -D
           options: {
             name: "[name].[hash:8].[ext]",
             outputPath: "img"
+          }
+        }
+}
+```
+
+### url-loader
+
+- url-loader和file-loader的工作方式是相似的，**但是可以将较小的文件，转成base64的URI**。
+- 安装url-loader
+
+```shell
+npm install url-loader -D
+```
+
+#### url-loader的limit
+
+- 但是开发中我们往往是小的图片需要转换，但是大的图片直接使用图片即可 
+  - 这是因为小的图片转换base64之后可以和页面一起被请求，减少不必要的请求过程； 
+  - 而大的图片也进行转换，反而会影响页面的请求速度；
+- 那么，我们如何可以限制哪些大小的图片转换和不转换呢？ 
+  - url-loader有一个options属性limit，可以用于设置转换的限制； 
+  - 下面的代码38kb的图片会进行base64编码，而295kb的不会；
+
+```js
+{
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            name: "[name].[hash:8].[ext]",
+            outputPath: "img",
+            limit: 100 * 1024
           }
         }
 }
