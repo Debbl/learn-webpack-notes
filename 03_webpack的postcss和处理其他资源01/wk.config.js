@@ -14,7 +14,20 @@ module.exports = {
       {
         test: /\.css$/,
         // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }], // 完整写法
-        use: ['style-loader', 'css-loader'], // 简写一
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          }
+        ], // 简写一
         // loader: "css-loader" // 简写二 只用一个 loader
       },
       {

@@ -1,0 +1,75 @@
+## PostCSS 工具
+
+- 什么是PostCSS呢？ 
+  - PostCSS是一个通过JavaScript来转换样式的工具； 
+  - 这个工具可以帮助我们进行一些CSS的转换和适配，比如**自动添加浏览器前缀、css样式的重置**； 
+  - 但是实现这些工具，我们需要借助于PostCSS对应的插件；
+- 如何使用PostCSS呢？主要就是两个步骤： 
+  - 第一步：查找PostCSS在构建工具中的扩展，比如webpack中的postcss-loader； 
+  - 第二步：选择可以添加你需要的PostCSS相关的插件；
+
+### 命令行使用postcss
+
+- 当然，我们能不能也直接在终端使用PostCSS呢？ 
+
+  - 也是可以的，但是我们需要单独安装一个工具postcss-cli； 
+
+- 我们可以安装一下它们：postcss、postcss-cli 
+
+  ```shell
+  npm install postcss postcss-cli -D
+  ```
+
+- 我们编写一个需要添加前缀的css： 
+
+  - https://autoprefixer.github.io/ 
+  - 我们可以在上面的网站中查询一些添加css属性的样式；
+
+```shell
+npx postcss ./src/css/test.css -o result.css # 输出文件
+```
+
+### 插件autoprefixer
+
+- 因为我们**需要添加前缀**，所以要安装autoprefixer：
+
+```shell
+npm install autoprefixer -D
+```
+
+- 直接使用使用postcss工具，并且制定使用autoprefixer
+
+```shell
+npx postcss --use autoprefixer -o end.css ./src/css/test.css 
+```
+
+## postcss-loader
+
+- 真实开发中我们必然不会直接使用命令行工具来对css进行处理，而是可以借助于构建工具： 
+  - 在webpack中使用postcss就是使用postcss-loader来处理的；
+
+- 我们来安装postcss-loader：
+
+```shell
+npm install postcss-loader -D
+```
+
+- 我们修改加载css的loader
+
+```js
+use: [
+    'style-loader',
+    'css-loader',
+    {
+        loader: "postcss-loader",
+        options: {
+            postcssOptions: {
+                plugins: [
+                    require('autoprefixer')
+                ]
+            }
+        }
+    }
+]
+```
+
