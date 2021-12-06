@@ -30,6 +30,16 @@ module.exports = {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[hash:8].[ext]",
+            outputPath: "img"
+          }
+        }
+      }
     ],
   },
 };

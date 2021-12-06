@@ -1,7 +1,0 @@
-@fontSize: 60px;
-@fontWeight: 700;
-
-.content {
-    font-size: @fontSize;
-    font-weight: @fontWeight;
-}

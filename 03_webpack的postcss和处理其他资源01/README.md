@@ -161,3 +161,71 @@ use: [
 ]
 ```
 
+## 加载和处理其他资源
+
+### file-loader
+
+- 要处理jpg、png等格式的图片，我们也需要有对应的loader：file-loader 
+  - file-loader的作用就是帮助我们处理**import/require()**方式引入的一个文件资源，并且会将它放到我们输出的文件夹中；
+  - 当然我们待会儿可以学习如何修改它的名字和所在文件夹；
+
+- 安装file-loader
+
+```shell
+npm install file-loader -D
+```
+
+```js
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: "file-loader"
+      }
+```
+
+### 文件的名称规则
+
+- 有时候我们处理后的文件名称按照一定的规则进行显示： 
+  - 比如保留原来的文件名、扩展名，同时为了防止重复，包含一个hash值等；
+- 这个时候我们可以使用PlaceHolders来完成，webpack给我们提供了大量的PlaceHolders来显示不同的内容： 
+  - https://webpack.js.org/loaders/file-loader/#placeholders 
+  - 我们可以在文档中查阅自己需要的placeholder；
+- 我们这里介绍几个最常用的`placeholder`： 
+  - [ext]： 处理文件的扩展名； p[name]：处理文件的名称； 
+  - [hash]：文件的内容，使用MD4的散列函数处理，生成的一个128位的hash值（32个十六进制）； 
+  - [contentHash]：在file-loader中和[hash]结果是一致的（在webpack的一些其他地方不一样，后面会讲到）； p
+  - [hash:<length>]：截图hash的长度，默认32个字符太长了； 
+  - [path]：文件相对于webpack配置文件的路径；
+
+### 设置文件名称
+
+```js
+{
+    test: /\.(png|jpe?g|gif|svg)$/,
+        use: {
+            loader: "file-loader",
+                options: {
+                    name: "img/[name].[hash:8].[ext]"
+                }
+        }
+}
+```
+
+### 设置文件的存放路径
+
+- 当然，我们刚才通过 img/ 已经设置了文件夹，这个也是vue、react脚手架中常见的设置方式： 
+  - 其实按照这种设置方式就可以了； 
+  - 当然我们也可以通过outputPath来设置输出的文件夹；
+
+```js
+ {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[hash:8].[ext]",
+            outputPath: "img"
+          }
+        }
+}
+```
+
