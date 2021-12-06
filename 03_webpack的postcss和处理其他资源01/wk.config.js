@@ -17,16 +17,7 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  require('autoprefixer')
-                ]
-              }
-            }
-          }
+          'postcss-loader'
         ], // 简写一
         // loader: "css-loader" // 简写二 只用一个 loader
       },

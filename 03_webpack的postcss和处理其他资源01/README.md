@@ -56,6 +56,8 @@ npm install postcss-loader -D
 
 - 我们修改加载css的loader
 
+> webpack.config.js
+
 ```js
 use: [
     'style-loader',
@@ -71,5 +73,18 @@ use: [
         }
     }
 ]
+```
+
+## 单独的postcss配置文件
+
+> postcss.config.js
+
+```js
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+}
+
 ```
 
