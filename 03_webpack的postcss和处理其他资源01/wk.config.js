@@ -16,7 +16,12 @@ module.exports = {
         // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }], // 完整写法
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1
+            }
+          },
           'postcss-loader'
         ], // 简写一
         // loader: "css-loader" // 简写二 只用一个 loader

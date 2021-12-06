@@ -1,7 +1,6 @@
 // import "css-loader!../css/index.css"; // loader 内联方式
 import '../css/index.css'; // 配置文件的方式
 import '../css/component.less';
-import '../css/test.css';
 
 function component() {
   const element = document.createElement('div');

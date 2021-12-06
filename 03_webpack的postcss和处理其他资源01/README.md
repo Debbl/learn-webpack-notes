@@ -114,3 +114,50 @@ module.exports = {
 }
 ```
 
+### 一个小的知识点
+
+- index.css引用test.css
+
+> index.css
+
+```css
+@import './test.css';
+
+.content {
+    color: red;
+}
+
+```
+
+> test.css
+
+```css
+:fullscreen {
+
+}
+
+.content {
+    color: #12345678;
+    user-select: none;
+    transition: all 2s ease;
+}
+```
+
+- 可以发现 test.css 并没有被处理
+  - 原因是因为index.css先被postcss-loader处理发现里面还有一个test.css就直接往下不是返回再用postcss-loader在处理一遍test.css
+- 我们可以在`webpack.config.js`里添加、
+  - importLoaders为1返回执行前一个loader
+
+```js
+use: [
+    'style-loader',
+    {
+        loader: "css-loader",
+        options: {
+            importLoaders: 1
+        }
+    },
+    'postcss-loader'
+]
+```
+
