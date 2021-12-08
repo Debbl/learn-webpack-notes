@@ -24,3 +24,14 @@
 - loader的importLoaders
 - file-loader
 - url-loader及其limit
+
+### 04_webpack的asset和一些插件
+
+- asset/resource
+- asset/inline
+- asset/source
+- asset
+- clean-webpack-plugin
+- html-webpack-plugin
+- define-plugin
+- copy-webpack-plugin
