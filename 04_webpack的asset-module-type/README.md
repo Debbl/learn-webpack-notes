@@ -82,3 +82,34 @@
 }
 ```
 
+## 认识plugin
+
+- Webpack的另一个核心是Plugin，官方有这样一段对Plugin的描述： 
+  - While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
+
+- 上面表达的含义翻译过来就是： 
+  - Loader是用于**特定的模块类型**进行转换； 
+  - Plugin可以用于**执行更加广泛的任务**，比如打包优化、资源管理、环境变量注入等；
+
+### CleanWebpackPlugin
+
+- 前面我们演示的过程中，每次修改了一些配置，重新打包时，都需要手动删除dist文件夹： 
+- 我们可以借助于一个插件来帮助我们完成，这个插件就是**CleanWebpackPlugin**； 
+- 首先，我们先安装这个插件：
+
+```shell
+npm install clean-webpack-plugin -D
+```
+
+```js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  // ...
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin()
+  ]
+};
+```
+
