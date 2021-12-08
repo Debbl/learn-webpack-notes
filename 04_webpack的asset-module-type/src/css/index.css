@@ -1,0 +1,10 @@
+.content {
+    font-size: 60px;
+    color: red;
+}
+:fullscreen {
+    color: #eee;
+}
+.bg-image {
+    background-image: url("../img/nhlt.jpg");
+}

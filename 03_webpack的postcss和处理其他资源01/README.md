@@ -192,7 +192,7 @@ npm install file-loader -D
 - 我们这里介绍几个最常用的`placeholder`： 
   - [ext]： 处理文件的扩展名； p[name]：处理文件的名称； 
   - [hash]：文件的内容，使用MD4的散列函数处理，生成的一个128位的hash值（32个十六进制）； 
-  - [contentHash]：在file-loader中和[hash]结果是一致的（在webpack的一些其他地方不一样，后面会讲到）； p
+  - [contentHash]：在file-loader中和[hash]结果是一致的（在webpack的一些其他地方不一样，后面会讲到）；
   - [hash:<length>]：截图hash的长度，默认32个字符太长了； 
   - [path]：文件相对于webpack配置文件的路径；
 
