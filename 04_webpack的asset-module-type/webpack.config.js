@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -53,6 +54,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "webpack项目",
       template: "./public/index.html"
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "public",
+          globOptions: {
+            ignore: [
+              '**/.DS_Store',
+              '**/index.html'
+            ]
+          }
+        }
+      ]
     })
   ]
 };
