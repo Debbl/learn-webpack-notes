@@ -93,7 +93,7 @@
 
 ### CleanWebpackPlugin
 
-- 前面我们演示的过程中，每次修改了一些配置，重新打包时，都需要手动删除dist文件夹： 
+- 前面我们演示的过程中，每次修改了一些配置，**重新打包时，都需要手动删除dist文件夹**： 
 - 我们可以借助于一个插件来帮助我们完成，这个插件就是**CleanWebpackPlugin**； 
 - 首先，我们先安装这个插件：
 
@@ -113,3 +113,121 @@ module.exports = {
 };
 ```
 
+### HtmlWebpackPlugin
+
+- 另外还有一个不太规范的地方： 
+  - 我们的HTML文件是编写在根目录下的，而**最终打包的dist文件夹中是没有index.html文件的**。 
+  - 在进行项目部署的时，**必然也是需要有对应的入口文件index.html**； 
+  - 所以我们也需要对**index.html进行打包处理**；
+
+- 对HTML进行打包处理我们可以使用另外一个插件：**HtmlWebpackPlugin**；
+
+```shell
+npm install html-webpack-plugin -D
+```
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  // ...
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
+};
+```
+
+#### 生成的index.html分析
+
+- 我们会发现，现在自动在dist文件夹中，生成了一个index.html的文件： 
+- 该文件中也自动添加了我们打包的bundle.js文件；
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Webpack App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script defer="defer" src="bundle.js"></script>
+  </head>
+  <body></body>
+</html>
+
+```
+
+- 这个文件是如何生成的呢？ 
+  - 默认情况下是根据**ejs的一个模板**来生成的；
+  - 在html-webpack-plugin的源码中，有一个default_index.ejs模块；
+
+#### 自定义HTML模板
+
+- 如果我们想在自己的模块中加入一些比较特别的内容： 
+  - 比如添加一个noscript标签，在用户的JavaScript被关闭时，给予响应的提示； 
+  - 比如在开发vue或者react项目时，我们需要一个可以挂载后续组件的根标签  \<div id="app">\</div>；
+
+- 这个我们需要一个属于自己的index.html模块：
+
+> public/index.html
+
+```html
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
+```
+
+- 自定义模板数据填充
+  - 上面的代码中，会有一些类似这样的语法<% 变量 %>，这个是EJS模块填充数据的方式。 
+  - 在配置HtmlWebpackPlugin时，我们可以添加如下配置： 
+    - template：指定我们要使用的模块所在的路径； 
+    - title：在进行htmlWebpackPlugin.options.title读取时，就会读到该信息；
+
+> 这里会报一个错误 ReferenceError: BASE_URL is not defined，需要用到 DefinePlugin
+
+### DefinePlugin的介绍
+
+- 这是因为在编译template模块时，有一个BASE_URL： 
+  - \<link rel="icon" href="<%= BASE_URL %>favicon.ico">； 
+  - 但是我们并没有设置过这个常量值，所以会出现没有定义的错误；
+
+- 这个时候我们可以使用DefinePlugin插件；
+
+#### DefinePlugin的使用
+
+- DefinePlugin允许在编译时创建配置的全局常量，是一个webpack内置的插件（不需要单独安装）：
+
+```js
+const { DefinePlugin } = require('webpack');
+module.exports = {
+  // ...
+  plugins: [
+    new DefinePlugin({
+      BASE_URL: '"./"'
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "webpack项目",
+      template: "./public/index.html"
+    })
+  ]
+};
+
+```
+
+- 这个时候，编译template就可以正确的编译了，会读取到BASE_URL的值；
