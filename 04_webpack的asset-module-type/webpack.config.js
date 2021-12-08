@@ -46,6 +46,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      title: "webpack项目",
+      template: "./public/index.html"
+    })
   ]
 };
