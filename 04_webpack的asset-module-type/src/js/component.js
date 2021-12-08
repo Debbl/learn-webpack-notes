@@ -1,5 +1,6 @@
 import "../css/index.css";
 import Imagezznh from "../img/zznh.png";
+import "../font/iconfont.css";
 
 function component() {
   const element = document.createElement('div');
@@ -17,6 +18,11 @@ function component() {
   bgDiv.className = "bg-image";
   bgDiv.style.backgroundColor = 'red';
   element.appendChild(bgDiv);
+
+  // 字体图标
+  const iEl = document.createElement('i');
+  iEl.className = 'iconfont icon-ashbin';
+  element.appendChild(iEl);
 
   return element;
 }

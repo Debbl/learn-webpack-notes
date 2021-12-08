@@ -67,3 +67,18 @@
 }
 ```
 
+### 字体文件 asset/resource
+
+- 这个时候打包会报错，因为无法正确的处理eot、ttf、woff等文件： 
+  - 我们可以选择使用file-loader来处理，也可以选择直接使用webpack5的资源模块类型来处理；
+
+```js
+{
+        test: /\.(woff2?|eot|ttf)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "font/[name].[hash:6][ext]"
+        }
+}
+```
+

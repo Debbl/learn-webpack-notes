@@ -35,6 +35,13 @@ module.exports = {
           }
         }
       },
+      {
+        test: /\.(woff2?|eot|ttf)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "font/[name].[hash:6][ext]"
+        }
+      }
     ],
   },
   plugins: [
