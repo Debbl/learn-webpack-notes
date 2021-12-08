@@ -230,4 +230,58 @@ module.exports = {
 
 ```
 
+> 这个 BASE_URL 的值是一个字符串
+
 - 这个时候，编译template就可以正确的编译了，会读取到BASE_URL的值；
+
+### CopyWebpackPlugin
+
+- 在vue的打包过程中，如果我们将一些文件放到public的目录下，那么这个目录会被**复制到dist文件夹中**。 
+  - 这个复制的功能，我们可以使用CopyWebpackPlugin来完成；
+- 安装CopyWebpackPlugin插件：
+
+```shell
+npm install copy-webpack-plugin -D
+```
+
+- 接下来配置CopyWebpackPlugin即可： 
+  - 复制的规则在patterns中设置； 
+  - from：设置从哪一个源中开始复制； 
+  - to：复制到的位置，**可以省略，会默认复制到打包的目录下**； 
+  - globOptions：设置一些额外的选项，其中可以编写**需要忽略的文件**： 
+    - .DS_Store：mac目录下回自动生成的一个文件； 
+    - index.html：也不需要复制，因为我们已经通过HtmlWebpackPlugin完成了index.html的生成；
+
+```js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+
+module.exports = {
+ 	// ...
+  plugins: [
+    new DefinePlugin({
+      BASE_URL: '"./"'
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "webpack项目",
+      template: "./public/index.html"
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "public",
+          globOptions: {
+            ignore: [
+              '**/.DS_Store',
+              '**/index.html'
+            ]
+          }
+        }
+      ]
+    })
+  ]
+};
+```
+
+> 忽略的文件记得要用 **/\<filename> 的格式
