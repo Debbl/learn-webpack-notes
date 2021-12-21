@@ -1,26 +1,13 @@
+'use strict';
 var __webpack_modules__ = {
-  './src/js/format.js': function (module) {
-    const dateFormat = (date) => {
-      return '2021-12-12';
-    };
-
-    const priceFormat = (price) => {
-      return '100.00';
-    };
-
-    module.exports = {
-      dateFormat,
-      priceFormat,
-    };
-  },
-
   './src/js/math.js': function (
     __unused_webpack_module,
     __webpack_exports__,
     __webpack_require__
   ) {
-    'use strict';
+    // 记录是一个 __esModule: { value: true }，这个模块是 esModule
     __webpack_require__.r(__webpack_exports__);
+    // 给 exports 设置了一个代理 definition (一种语法不能使用)
     __webpack_require__.d(__webpack_exports__, {
       sum: function () {
         return sum;
@@ -39,8 +26,10 @@ var __webpack_modules__ = {
   },
 };
 
+// 模块缓存
 var __webpack_module_cache__ = {};
 
+// require 加载模块
 function __webpack_require__(moduleId) {
   var cachedModule = __webpack_module_cache__[moduleId];
   if (cachedModule !== undefined) {
@@ -56,23 +45,9 @@ function __webpack_require__(moduleId) {
   return module.exports;
 }
 
+// 立即执行函数
 !(function () {
-  __webpack_require__.n = function (module) {
-    var getter =
-      // 判断是不是 esModule
-      module && module.__esModule
-        ? function () {
-            return module['default'];
-          }
-        : function () {
-            return module;
-          };
-    __webpack_require__.d(getter, { a: getter });
-    return getter;
-  };
-})();
-
-!(function () {
+  // 函数本身也是一个对象，给对象添加一个属性: d => function
   __webpack_require__.d = function (exports, definition) {
     for (var key in definition) {
       if (
@@ -88,17 +63,21 @@ function __webpack_require__(moduleId) {
   };
 })();
 
+// 立即执行函数
 !(function () {
+  // 添加了一个 O 属性
   __webpack_require__.o = function (obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
   };
 })();
 
 !(function () {
+  // 定义了一个属性 r
   __webpack_require__.r = function (exports) {
     if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
       Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
     }
+    // 标记是 esModule
     Object.defineProperty(exports, '__esModule', { value: true });
   };
 })();
@@ -106,28 +85,14 @@ function __webpack_require__(moduleId) {
 var __webpack_exports__ = {};
 
 !(function () {
-  'use strict';
-
   __webpack_require__.r(__webpack_exports__);
-  var _js_format__WEBPACK_IMPORTED_MODULE_0__ =
-    __webpack_require__('./src/js/format.js');
-  var _js_format__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(
-    _js_format__WEBPACK_IMPORTED_MODULE_0__
-  );
-  // esModule 导出 CommonJS 导入
-  const math = __webpack_require__(/*! ./js/math.js */ './src/js/math.js');
+  var _js_math_js__WEBPACK_IMPORTED_MODULE_0__ =
+    // 加载模块
+    __webpack_require__('./src/js/math.js');
 
-  // CommonJS 导出 esModule 导入
-
-  console.log(math.sum(10, 20));
-  console.log(math.mul(20, 30));
-
-  console.log(
-    _js_format__WEBPACK_IMPORTED_MODULE_0___default().dateFormat('aaa')
-  );
-  console.log(
-    _js_format__WEBPACK_IMPORTED_MODULE_0___default().priceFormat('bbb')
-  );
+  // 一个特殊的语法 (0, function)
+  console.log((0, _js_math_js__WEBPACK_IMPORTED_MODULE_0__.sum)(10, 20));
+  console.log((0, _js_math_js__WEBPACK_IMPORTED_MODULE_0__.mul)(20, 30));
 })();
 
 //# sourceMappingURL=bundle.js.map
