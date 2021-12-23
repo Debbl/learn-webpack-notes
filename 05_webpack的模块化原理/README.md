@@ -333,3 +333,128 @@ var __webpack_exports__ = {};
 
 ```
 
+### source-map
+
+> https://webpack.docschina.org/configuration/devtool/
+
+- 我们的代码通常运行在浏览器上时，是通过打包压缩的： 
+  - 也就是真实跑在浏览器上的代码，和我们编写的代码其实是有差异的； 
+  - 比如ES6的代码可能被转换成ES5； p比如对应的代码行号、列号在经过编译后肯定会不一致； 
+  - 比如代码进行丑化压缩时，会将编码名称等修改； p比如我们使用了TypeScript等方式编写的代码，最终转换成JavaScript；
+- 但是，当代码报错需要调试时（debug），调试转换后的代码是很困难的 
+- 但是我们能保证代码不出错吗？不可能。 
+- 那么如何可以调试这种转换后不一致的代码呢？答案就是source-map 
+  - source-map是从**已转换的代码**，映射到**原始的源文件**； 
+  - 使浏览器可以**重构原始源并在调试器中显示重建的原始源**；
+
+> 在出现错误后，快速定位打包前的源文件
+
+- 如何可以使用source-map呢？两个步骤： 
+
+  - 第一步：根据源文件，生成source-map文件，webpack在打包时，可以通过配置生成source-map； 
+
+  - 第二步：在转换后的代码，最后添加一个注释，它指向sourcemap； 
+
+    ```
+    //# sourceMappingURL=common.bundle.js.map
+    ```
+
+#### 分析source-map
+
+- 最初source-map生成的文件带下是原始文件的10倍，第二版减少了约50%，第三版又减少了50%，所以目前一个 133kb的文件，最终的source-map的大小大概在300kb。
+
+- 目前的source-map长什么样子呢？ 
+  - version：当前使用的版本，也就是最新的第三版； 
+  - sources：从哪些文件转换过来的source-map和打包的代码（最初始的文件）； 
+  - names：转换前的变量和属性名称（因为我目前使用的是development模式，所以不需要保留转换前的名 称）；
+  - mappings：source-map用来和源文件映射的信息（比如位置信息等），一串base64 VLQ（veriablelength quantity可变长度值）编码；
+  - file：打包后的文件（浏览器加载的文件）； 
+  - sourceContent：转换前的具体代码信息（和sources是对应的关系）； 
+  - sourceRoot：所有的sources相对的根目录；
+
+```json
+{
+  "version": 3,
+  "file": "bundle.js",
+  "mappings": "mCAQAA,EAAOC,QAAU,CACfC,WATkBC,GACX,aASPC,YANmBC,GACZ,W,mGCLF,MAAMC,EAAM,CAACC,EAAMC,IACjBD,EAAOC,EAGHC,EAAM,CAACF,EAAMC,IACjBD,EAAOC,ICJZE,EAA2B,GAG/B,SAASC,EAAoBC,GAE5B,IAAIC,EAAeH,EAAyBE,GAC5C,QAAqBE,IAAjBD,EACH,OAAOA,EAAaZ,QAGrB,IAAID,EAASU,EAAyBE,GAAY,CAGjDX,QAAS,IAOV,OAHAc,EAAoBH,GAAUZ,EAAQA,EAAOC,QAASU,GAG/CX,EAAOC,QCpBfU,EAAoBK,EAAI,SAAShB,GAChC,IAAIiB,EAASjB,GAAUA,EAAOkB,WAC7B,WAAa,OAAOlB,EAAgB,SACpC,WAAa,OAAOA,GAErB,OADAW,EAAoBQ,EAAEF,EAAQ,CAAEG,EAAGH,IAC5BA,GCLRN,EAAoBQ,EAAI,SAASlB,EAASoB,GACzC,IAAI,IAAIC,KAAOD,EACXV,EAAoBY,EAAEF,EAAYC,KAASX,EAAoBY,EAAEtB,EAASqB,IAC5EE,OAAOC,eAAexB,EAASqB,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EX,EAAoBY,EAAI,SAASK,EAAKC,GAAQ,OAAOL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,ICC/FlB,EAAoBsB,EAAI,SAAShC,GACX,oBAAXiC,QAA0BA,OAAOC,aAC1CX,OAAOC,eAAexB,EAASiC,OAAOC,YAAa,CAAEC,MAAO,WAE7DZ,OAAOC,eAAexB,EAAS,aAAc,CAAEmC,OAAO,K,qCCJvD,MAAM,IAAE9B,EAAG,IAAEG,GAAQ,EAAQ,KAK7B4B,QAAQC,IAAIhC,EAAI,GAAI,KACpB+B,QAAQC,IAAI7B,EAAI,GAAI,KAEpB4B,QAAQC,KAAI,IAAApC,YAAW,QACvBmC,QAAQC,KAAI,IAAAlC,aAAY,QAExBiC,QAAQC,IAAIC,K",
+  "sources": [
+    "webpack://webpack-mode/./src/js/format.js",
+    "webpack://webpack-mode/./src/js/math.js",
+    "webpack://webpack-mode/webpack/bootstrap",
+    "webpack://webpack-mode/webpack/runtime/compat get default export",
+    "webpack://webpack-mode/webpack/runtime/define property getters",
+    "webpack://webpack-mode/webpack/runtime/hasOwnProperty shorthand",
+    "webpack://webpack-mode/webpack/runtime/make namespace object",
+    "webpack://webpack-mode/./src/index.js"
+  ],
+  "sourcesContent": [
+    "const dateFormat = (date) => {\r\n  return '2021-12-12'\r\n}\r\n\r\nconst priceFormat = (price) => {\r\n  return '100.00'\r\n}\r\n\r\nmodule.exports = {\r\n  dateFormat,\r\n  priceFormat\r\n}\r\n",
+    "export const sum = (num1, num2) => {\r\n  return num1 + num2;\r\n}\r\n\r\nexport const mul = (num1, num2) => {\r\n  return num1 * num2;\r\n}\r\n",
+    "// The module cache\nvar __webpack_module_cache__ = {};\n\n// The require function\nfunction __webpack_require__(moduleId) {\n\t// Check if module is in cache\n\tvar cachedModule = __webpack_module_cache__[moduleId];\n\tif (cachedModule !== undefined) {\n\t\treturn cachedModule.exports;\n\t}\n\t// Create a new module (and put it into the cache)\n\tvar module = __webpack_module_cache__[moduleId] = {\n\t\t// no module.id needed\n\t\t// no module.loaded needed\n\t\texports: {}\n\t};\n\n\t// Execute the module function\n\t__webpack_modules__[moduleId](module, module.exports, __webpack_require__);\n\n\t// Return the exports of the module\n\treturn module.exports;\n}\n\n",
+    "// getDefaultExport function for compatibility with non-harmony modules\n__webpack_require__.n = function(module) {\n\tvar getter = module && module.__esModule ?\n\t\tfunction() { return module['default']; } :\n\t\tfunction() { return module; };\n\t__webpack_require__.d(getter, { a: getter });\n\treturn getter;\n};",
+    "// define getter functions for harmony exports\n__webpack_require__.d = function(exports, definition) {\n\tfor(var key in definition) {\n\t\tif(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {\n\t\t\tObject.defineProperty(exports, key, { enumerable: true, get: definition[key] });\n\t\t}\n\t}\n};",
+    "__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }",
+    "// define __esModule on exports\n__webpack_require__.r = function(exports) {\n\tif(typeof Symbol !== 'undefined' && Symbol.toStringTag) {\n\t\tObject.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });\n\t}\n\tObject.defineProperty(exports, '__esModule', { value: true });\n};",
+    "// esModule 导出 CommonJS 导入\r\nconst { sum, mul } = require('./js/math.js');\r\n\r\n// CommonJS 导出 esModule 导入\r\nimport { dateFormat, priceFormat } from './js/format';\r\n\r\nconsole.log(sum(10, 20));\r\nconsole.log(mul(20, 30));\r\n\r\nconsole.log(dateFormat('aaa'));\r\nconsole.log(priceFormat('bbb'));\r\n\r\nconsole.log(cba);\r\n"
+  ],
+  "names": [
+    "module",
+    "exports",
+    "dateFormat",
+    "date",
+    "priceFormat",
+    "price",
+    "sum",
+    "num1",
+    "num2",
+    "mul",
+    "__webpack_module_cache__",
+    "__webpack_require__",
+    "moduleId",
+    "cachedModule",
+    "undefined",
+    "__webpack_modules__",
+    "n",
+    "getter",
+    "__esModule",
+    "d",
+    "a",
+    "definition",
+    "key",
+    "o",
+    "Object",
+    "defineProperty",
+    "enumerable",
+    "get",
+    "obj",
+    "prop",
+    "prototype",
+    "hasOwnProperty",
+    "call",
+    "r",
+    "Symbol",
+    "toStringTag",
+    "value",
+    "console",
+    "log",
+    "cba"
+  ],
+  "sourceRoot": ""
+}
+
+```
+
+#### 下面几个值不会生成source-map
+
+- false：不使用source-map，也就是没有任何和source-map相关的内容。 
+- none：production模式下的默认值，不生成source-map。 
+- eval：development模式下的默认值，不生成source-map 
+  - 但是它会在eval执行的代码中，添加 //# sourceURL=； 
+  - 它会被浏览器在执行时解析，并且在调试面板中生成对应的一些文件目录，方便我们调试代码；
+
+#### eval 的效果
+
+
+
+
+

@@ -9,3 +9,5 @@ console.log(mul(20, 30));
 
 console.log(dateFormat('aaa'));
 console.log(priceFormat('bbb'));
+
+console.log(cba);
