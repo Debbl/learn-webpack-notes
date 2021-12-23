@@ -454,7 +454,15 @@ var __webpack_exports__ = {};
 
 #### eval 的效果
 
+```js
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/format */ \"./src/js/format.js\");\n/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_js_format__WEBPACK_IMPORTED_MODULE_0__);\n// esModule 导出 CommonJS 导入\r\nconst { sum, mul } = __webpack_require__(/*! ./js/math.js */ \"./src/js/math.js\");\r\n\r\n// CommonJS 导出 esModule 导入\r\n\r\n\r\nconsole.log(sum(10, 20));\r\nconsole.log(mul(20, 30));\r\n\r\nconsole.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.dateFormat)('aaa'));\r\nconsole.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.priceFormat)('bbb'));\r\n\r\nconsole.log(cba);\r\n\n\n//# sourceURL=webpack://webpack-mode/./src/index.js?");
+```
 
+- 不生成 source-map
+- 所有函数通过 eval 来执行，可以把代码变成字符串来执行，正常执行
+- 映射到源文件
+
+> 可以精确到错误在那一列
 
 
 

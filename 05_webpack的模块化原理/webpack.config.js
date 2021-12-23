@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: "production",
-  devtool: "source-map",
+  mode: "development",
+  devtool: "eval",
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
