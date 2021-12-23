@@ -464,5 +464,37 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_
 
 > 可以精确到错误在那一列
 
+- source-map值
+  - 生成一个独立的source-map文件，并且在bundle文件中有一个注释，指向source-map文件；
+- eval-source-map值
+  - eval-source-map：会生成sourcemap，但是source-map是以DataUrl添加到eval函数的后面
+- inline-source-map值
+  - inline-source-map：会生成sourcemap，但是source-map是以DataUrl添加到bundle文件的后面
+- cheap-source-map
+  - 会生成sourcemap，但是会更加高效一些（cheap低开销），因为它**没有生成列映射（Column Mapping）** 
+  - 因为在开发中，我们只需要行信息通常就可以定位到错误了
 
+#### 多个值的组合
 
+- 事实上，webpack提供给我们的26个值，是可以进行多组合的。 
+
+- 组合的规则如下： 
+
+  - inline-|hidden-|eval：三个值时三选一； 
+
+  - nosources：可选值； 
+
+  - cheap可选值，并且可以跟随module的值；
+
+    ```
+    [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map
+    ```
+
+#### 最佳实践
+
+- 开发阶段：推荐使用 source-map或者cheap-module-source-map 
+  - 这分别是vue和react使用的值，可以获取调试信息，方便快速开发；
+
+- 测试阶段：推荐使用 source-map或者cheap-module-source-map 
+  - 测试阶段我们也希望在浏览器下看到正确的错误提示； 
+- 发布阶段：false、缺省值（不写）

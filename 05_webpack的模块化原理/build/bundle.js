@@ -1,24 +1,5 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/format */ \"./src/js/format.js\");\n/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_js_format__WEBPACK_IMPORTED_MODULE_0__);\n// esModule 导出 CommonJS 导入\r\nconst { sum, mul } = __webpack_require__(/*! ./js/math.js */ \"./src/js/math.js\");\r\n\r\n// CommonJS 导出 esModule 导入\r\n\r\n\r\nconsole.log(sum(10, 20));\r\nconsole.log(mul(20, 30));\r\n\r\nconsole.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.dateFormat)('aaa'));\r\nconsole.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.priceFormat)('bbb'));\r\n\r\nconsole.log(cba);\r\n\n\n//# sourceURL=webpack://webpack-mode/./src/index.js?");
-
-/***/ }),
 
 /***/ "./src/js/format.js":
 /*!**************************!*\
@@ -26,7 +7,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_
   \**************************/
 /***/ (function(module) {
 
-eval("const dateFormat = (date) => {\r\n  return '2021-12-12'\r\n}\r\n\r\nconst priceFormat = (price) => {\r\n  return '100.00'\r\n}\r\n\r\nmodule.exports = {\r\n  dateFormat,\r\n  priceFormat\r\n}\r\n\n\n//# sourceURL=webpack://webpack-mode/./src/js/format.js?");
+const dateFormat = (date) => {
+  return '2021-12-12'
+}
+
+const priceFormat = (price) => {
+  return '100.00'
+}
+
+module.exports = {
+  dateFormat,
+  priceFormat
+}
+
 
 /***/ }),
 
@@ -37,7 +30,19 @@ eval("const dateFormat = (date) => {\r\n  return '2021-12-12'\r\n}\r\n\r\nconst 
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"sum\": function() { return /* binding */ sum; },\n/* harmony export */   \"mul\": function() { return /* binding */ mul; }\n/* harmony export */ });\nconst sum = (num1, num2) => {\r\n  return num1 + num2;\r\n}\r\n\r\nconst mul = (num1, num2) => {\r\n  return num1 * num2;\r\n}\r\n\n\n//# sourceURL=webpack://webpack-mode/./src/js/math.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "sum": function() { return /* binding */ sum; },
+/* harmony export */   "mul": function() { return /* binding */ mul; }
+/* harmony export */ });
+const sum = (num1, num2) => {
+  return num1 + num2;
+}
+
+const mul = (num1, num2) => {
+  return num1 * num2;
+}
+
 
 /***/ })
 
@@ -109,11 +114,31 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+!function() {
+"use strict";
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/format */ "./src/js/format.js");
+/* harmony import */ var _js_format__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_js_format__WEBPACK_IMPORTED_MODULE_0__);
+// esModule 导出 CommonJS 导入
+const { sum, mul } = __webpack_require__(/*! ./js/math.js */ "./src/js/math.js");
+
+// CommonJS 导出 esModule 导入
+
+
+console.log(sum(10, 20));
+console.log(mul(20, 30));
+
+console.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.dateFormat)('aaa'));
+console.log((0,_js_format__WEBPACK_IMPORTED_MODULE_0__.priceFormat)('bbb'));
+
+console.log(cba);
+
+}();
 /******/ })()
 ;
+//# sourceMappingURL=bundle.js.map

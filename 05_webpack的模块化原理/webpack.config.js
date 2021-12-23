@@ -4,48 +4,45 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: "development",
-  devtool: "eval",
+  mode: 'development',
+  devtool: 'cheap-source-map',
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './build')
+    path: path.resolve(__dirname, './build'),
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
-          "postcss-loader"
-        ]
-      }
-    ]
+          'postcss-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: "webpack site",
-      template: "./public/index.html"
+      title: 'webpack site',
+      template: './public/index.html',
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "public",
+          from: 'public',
           globOptions: {
-            ignore: [
-              '**/.DS_Store',
-              '**/index.html'
-            ]
-          }
-        }
-      ]
-    })
-  ]
-}
+            ignore: ['**/.DS_Store', '**/index.html'],
+          },
+        },
+      ],
+    }),
+  ],
+};
