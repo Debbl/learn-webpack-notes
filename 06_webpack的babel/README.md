@@ -27,3 +27,71 @@ npm install @babel/cli @babel/core
 npx babel src --out-dir dist
 ```
 
+> 内容不会改变，需要安装对应的插件
+
+#### 插件转化箭头函数
+
+```shell
+npm install @babel/plugin-transform-arrow-functions -D
+```
+
+> 命令行使用
+
+```shell
+npx babel src --out-dir dist --plugins=@babel/plugin-transform-arrow-functions
+```
+
+```js
+const message = "Hello World";
+
+const foo = function (info) {
+  console.log(info);
+};
+
+foo(message);
+```
+
+#### 块级作用域转化
+
+```shell
+npm install @babel/plugin-transform-block-scoping -D
+```
+
+```shell
+npx babel src --out-dir dist --plugins=@babel/plugin-transform-arrow-functions,@babel/plugin-transform-block-scoping
+```
+
+```js
+var message = "Hello World";
+
+var foo = function (info) {
+  console.log(info);
+};
+
+foo(message);
+```
+
+### 使用预设
+
+- 但是如果要转换的内容过多，一个个设置是比较麻烦的，我们可以使用预设（preset）：
+  - 后面我们再具体来讲预设代表的含义；
+
+> 一系列插件的组合
+
+- 使用
+
+```shell
+npx babel src --out-dir result --presets=@babel/preset-env
+```
+
+```js
+"use strict"; // 使用严格模式
+var message = "Hello World";
+
+var foo = function foo(info) {
+  console.log(info);
+};
+
+foo(message);
+```
+
