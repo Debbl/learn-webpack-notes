@@ -95,3 +95,20 @@ var foo = function foo(info) {
 foo(message);
 ```
 
+## Babel 的底层原理
+
+- babel是如何做到将我们的一段代码（ES6、TypeScript、React）转成另外一段代码（ES5）的呢？
+  - 从一种源代码（原生语言）转换成另一种源代码（目标语言），这是什么的工作呢？ 
+  - 就是编译器，事实上我们可以将babel看成就是一个编译器。 
+  - Babel编译器的作用就是将我们的源代码，转换成浏览器可以直接识别的另外一段源代码；
+- Babel也拥有编译器的工作流程：
+  - 解析阶段（Parsing） 
+  - 转换阶段（Transformation） 
+  - 生成阶段（Code Generation）
+
+![](./images/js代码.png)
+
+![](./images/babel执行原理.png)
+
+- https://resources.jointjs.com/demos/javascript-ast
+- https://github.com/jamiebuilds/the-super-tiny-compiler
