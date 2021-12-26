@@ -81,3 +81,42 @@ module.exports = {
 };
 ```
 
+- 第三个值：entry 
+
+  - 如果我们依赖的某一个库本身使用了某些polyfill的特性，但是因为我们使用的是usage，所以之后用户浏览器 可能会报错；
+  - 所以，如果你担心出现这种情况，可以使用 entry； 
+  - 并且需要在入口文件中添加 `import 'core-js/stable'; import 'regenerator-runtime/runtime'; 
+  - **这样做会根据 browserslist 目标导入所有的polyfill，但是对应的包也会变大**
+
+  ```js
+  module.exports = {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          useBuiltIns: 'entry',
+          corejs: 3, // 指定 core-js 为3的版本
+        },
+      ],
+    ],
+  };
+  ```
+
+  > 导入core-js/stable和regenerator-runtime
+
+  ```js
+  import 'core-js/stable';
+  import 'regenerator-runtime/runtime';
+  
+  const message = "Hello World";
+  
+  const foo = (info) => {
+    console.log(info);
+  }
+  
+  const p = new Promise((resolve, reject) => {})
+  
+  foo(message);
+  ```
+
+  
