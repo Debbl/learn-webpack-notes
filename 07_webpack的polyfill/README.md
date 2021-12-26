@@ -119,4 +119,43 @@ module.exports = {
   foo(message);
   ```
 
-  
+## 认识Plugin-transform-runtime（了解）
+
+- 在前面我们使用的polyfill，默认情况是添加的所有特性都是全局的 
+  - 如果我们正在编写一个工具库，这个工具库需要使用polyfill； 
+  - 别人在使用我们工具时，工具库通过polyfill添加的特性，可能会污染它们的代码； 
+  - 所以，当编写工具时，babel更推荐我们使用一个插件： @babel/plugin-transform-runtime来完成polyfill 的功能；
+- 安装 @babel/plugin-transform-runtime：
+
+```shell
+npm install @babel/plugin-transform-runtime --save
+```
+
+> 因为我们使用了corejs3，所以我们需要安装对应的库：
+
+```shell
+npm install @babel/runtime-corejs3 --save
+```
+
+```js
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        // useBuiltIns: 'entry',
+        // corejs: 3, // 指定 core-js 为3的版本
+      },
+    ],
+  ],
+  plugins: [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        corejs: 3,
+      },
+    ],
+  ],
+};
+```
+
