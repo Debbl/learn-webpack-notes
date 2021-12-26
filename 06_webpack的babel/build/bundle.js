@@ -3,9 +3,9 @@ var __webpack_exports__ = {};
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-var message = "Hello World";
+const message = "Hello World";
 
-var foo = function foo(info) {
+const foo = info => {
   console.log(info);
 };
 

@@ -179,3 +179,20 @@ foo(message);
       },
 ```
 
+### 设置目标浏览器的 targets
+
+```js
+{
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'chrome 88' }]],
+          },
+        },
+      },
+```
+
+- 那么，如果两个同时配置了，哪一个会生效呢？ 
+  - 配置的targets属性会覆盖browserslist； 
+  - 但是在开发中，更推荐通过browserslist来配置，因为类似于postcss工具，也会使用browserslist，进行统一浏览器 的适配；
