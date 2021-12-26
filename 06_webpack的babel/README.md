@@ -112,3 +112,70 @@ foo(message);
 
 - https://resources.jointjs.com/demos/javascript-ast
 - https://github.com/jamiebuilds/the-super-tiny-compiler
+
+## Babel-loader
+
+- 在实际开发中，我们通常会在构建工具中通过配置babel来对其进行使用的，比如在webpack中。
+
+- 那么我们就需要去安装相关的依赖：
+
+  - 如果之前已经安装了@babel/core，那么这里不需要再次安装；
+
+  ```shel
+  npm install babel-loader @babel/core
+  ```
+
+  ```js
+        {
+          test: /\.js$/,
+          use: 'babel-loader'
+        }
+  ```
+
+#### 指定使用那些 babel 插件
+
+```js
+{
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              '@babel/plugin-transform-arrow-functions',
+              '@babel/plugin-transform-block-scoping',
+            ],
+          },
+        },
+      },
+```
+
+## Babel-preset
+
+> 会根据 browserslist 文件，调整预设规则
+
+- 如果我们一个个去安装使用插件，那么需要手动来管理大量的babel插件，我们可以直接给webpack提供一个 preset，webpack会根据我们的预设来加载对应的插件列表，并且将其传递给babel。
+
+- 比如常见的预设有三个： 
+
+  - env 
+  - react 
+  - TypeScript
+
+- 安装preset-env：
+
+  ```shell
+  npm install @babel/preset-env
+  ```
+
+```js
+{
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+```
+
