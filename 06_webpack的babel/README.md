@@ -196,3 +196,22 @@ foo(message);
 - 那么，如果两个同时配置了，哪一个会生效呢？ 
   - 配置的targets属性会覆盖browserslist； 
   - 但是在开发中，更推荐通过browserslist来配置，因为类似于postcss工具，也会使用browserslist，进行统一浏览器 的适配；
+
+## Babel 的配置文件
+
+- 像之前一样，我们可以将babel的配置信息放到一个独立的文件中，babel给我们提供了两种配置文件的编写： 
+  - babel.config.json（或者.js，.cjs，.mjs）文件； 
+  - .babelrc.json（或者.babelrc，.js，.cjs，.mjs）文件；
+- 它们两个有什么区别呢？目前很多的项目都采用了多包管理的方式（babel本身、element-plus、umi等）； 
+  - .babelrc.json：早期使用较多的配置方式，但是对于配置Monorepos项目是比较麻烦的； 
+  - babel.config.json（babel7）：可以直接作用于Monorepos项目的子包，**更加推荐**；
+
+> babel.config.js
+
+```js
+module.exports = {
+  presets: ['@babel/preset-env'],
+};
+
+```
+
