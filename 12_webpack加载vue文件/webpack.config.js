@@ -2,7 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader-plugin');
 
 module.exports = {
   mode: 'development',
@@ -37,6 +37,24 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          'postcss-loader',
+          'less-loader'
+        ]
+      }
     ],
   },
   plugins: [
@@ -55,6 +73,6 @@ module.exports = {
         },
       ],
     }),
-    new ESLintPlugin(),
+    new VueLoaderPlugin(),
   ],
 };

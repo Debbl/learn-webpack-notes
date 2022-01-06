@@ -1,8 +1,6 @@
-const message = 'Hello World';
-const foo = (info) => {
-  console.log(info);
-};
+import Vue from 'vue';
+import App from './App.vue';
 
-foo(message);
-
-export {};
+new Vue({
+  render: h => h(App)
+}).$mount("#app");
