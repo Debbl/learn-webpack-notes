@@ -4,10 +4,21 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: 'eslint:recommended',
+  extends: ['plugin:vue/essential', 'airbnb-base'],
   parserOptions: {
     ecmaVersion: 13,
-    sourceType: 'module',
+    parser: '@typescript-eslint/parser',
   },
-  rules: {},
+  plugins: ['vue', '@typescript-eslint'],
+  rules: {
+      // 0 -> off
+      // 1 -> warn
+      // 2 -> error
+      "no-unused-vars": 0,
+      "quotes": [
+          "error",
+          "double"
+      ],
+      "no-console": 0
+  },
 };
