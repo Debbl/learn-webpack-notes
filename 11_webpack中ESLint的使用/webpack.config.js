@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -29,15 +30,13 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        },
+        use: ['babel-loader'],
       },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
-      }
+        use: 'babel-loader',
+      },
     ],
   },
   plugins: [
@@ -56,5 +55,6 @@ module.exports = {
         },
       ],
     }),
+    new ESLintPlugin(),
   ],
 };

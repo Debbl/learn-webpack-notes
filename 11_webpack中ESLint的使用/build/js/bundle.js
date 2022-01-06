@@ -18,10 +18,10 @@
 /************************************************************************/
 var __webpack_exports__ = {};
 /*!**********************!*\
-  !*** ./src/index.ts ***!
+  !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-var message = 'Hello TypeScript!';
+var message = 'Hello World';
 
 var foo = function foo(info) {
   console.log(info);
