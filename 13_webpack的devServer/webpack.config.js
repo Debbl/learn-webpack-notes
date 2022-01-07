@@ -8,6 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
+  devServer: {
+    hot: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
