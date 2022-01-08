@@ -22,6 +22,7 @@ module.exports = {
       publicPath: '/static',
     },
     port: 3000,
+    open: true,
   },
   module: {
     rules: [

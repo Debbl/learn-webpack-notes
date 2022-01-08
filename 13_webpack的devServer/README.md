@@ -322,3 +322,16 @@ module.exports = {
 };
 ```
 
+# open
+
+告诉 dev-server 在服务器已经启动后打开浏览器。设置其为 `true` 以打开你的默认浏览器。
+
+```js
+module.exports = {
+  //...
+  devServer: {
+    open: true,
+  },
+};
+```
+
