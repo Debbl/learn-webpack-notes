@@ -286,5 +286,16 @@ module.exports = {
 
 > 将 `accets` 目录的资源放到服务器的 `/serve-public-path-url` 目录下，提供服务
 
+# hot
 
+启用热模块替换功能，在构建失败时不刷新页面作为回退，使用 `hot: 'only'`
+
+```js
+module.exports = {
+  //...
+  devServer: {
+    hot: 'only',
+  },
+};
+```
 
