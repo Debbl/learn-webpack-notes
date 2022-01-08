@@ -268,10 +268,23 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 ## devServer的publicPath
 
-- devServer中也有一个publicPath的属性，该属性是指定本地服务所在的文件夹： 
-  - 它的默认值是 /，也就是我们直接访问端口即可访问其中的资源 http://localhost:8080； 
-  - 如果我们将其设置为了 /abc，那么我们需要通过 http://localhost:8080/abc才能访问到对应的打包后的资源； 
-  - 并且这个时候，我们其中的bundle.js通过 http://localhost:8080/bundle.js也是无法访问的： 
-    - 所以必须将output.publicPath也设置为 /abc； 
-    - 官方其实有提到，**建议 `devServer.publicPath` 与 `output.publicPath` 相同**；
+告诉服务器在哪个 URL 上提供 [`static.directory`](https://webpack.docschina.org/configuration/dev-server/#directory) 的内容。例如为在 `/serve-public-path-url/manifest.json` 中的 `assets/manifest.json` 提供服务，你的配置项应该像下面这样：
+
+```js
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'assets'),
+      publicPath: '/serve-public-path-url',
+    },
+  },
+};
+```
+
+> 将 `accets` 目录的资源放到服务器的 `/serve-public-path-url` 目录下，提供服务
+
+
 
