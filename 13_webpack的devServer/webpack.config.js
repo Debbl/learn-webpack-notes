@@ -9,13 +9,17 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: './abc',
+    // publicPath: './abc',
   },
   devServer: {
     hot: true,
+    // static: {
+    //   directory: path.join(__dirname, './build'),
+    //   publicPath: '/abc',
+    // },
     static: {
-      directory: path.join(__dirname, './build'),
-      publicPath: '/abc',
+      directory: path.join(__dirname, './static'),
+      publicPath: '/static'
     },
   },
   module: {
