@@ -218,3 +218,60 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
   - 浏览器拿到两个新的文件后，通过HMR runtime机制，加载这两个文件，并且针对修改的模块进行更新；
 
   ![](./images/hmr.png)
+
+# Webpack 的路径
+
+## output的publicPath
+
+- output中的path的作用是告知webpack之后的输出目录： 
+  - 比如静态资源的js、css等输出到哪里，常见的会设置为dist、build文件夹等；
+- output中还有一个publicPath属性，该属性是指定index.html文件打包引用的一个基本路径： 
+  - 它的默认值是一个空字符串，所以我们打包后引入js文件时，路径是 bundle.js； 
+  - 在开发中，我们也将其设置为 / ，路径是 /bundle.js，那么浏览器会根据所在的域名+路径去请求对应的资源； 
+  - 如果我们希望在本地直接打开html文件来运行，会将其设置为 ./，路径时 ./bundle.js，可以根据相对路径去 查找资源；
+- 默认值 `/`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="bundle.js"></script></head>
+<body>
+    
+</body>
+</html>
+```
+
+- `output.publicPath: './'`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="./bundle.js"></script></head>
+<body>
+    <div id="app"></div>
+    <div id="root"></div>
+</body>
+</html>
+```
+
+> 可以发现引入 `bundle.js` 的路径发生了变化
+
+## devServer的publicPath
+
+- devServer中也有一个publicPath的属性，该属性是指定本地服务所在的文件夹： 
+  - 它的默认值是 /，也就是我们直接访问端口即可访问其中的资源 http://localhost:8080； 
+  - 如果我们将其设置为了 /abc，那么我们需要通过 http://localhost:8080/abc才能访问到对应的打包后的资源； 
+  - 并且这个时候，我们其中的bundle.js通过 http://localhost:8080/bundle.js也是无法访问的： 
+    - 所以必须将output.publicPath也设置为 /abc； 
+    - 官方其实有提到，**建议 `devServer.publicPath` 与 `output.publicPath` 相同**；
+
