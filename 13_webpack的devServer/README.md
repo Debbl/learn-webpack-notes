@@ -335,3 +335,17 @@ module.exports = {
 };
 ```
 
+# compress
+
+启用 [gzip compression](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/)：
+
+```js
+module.exports = {
+  //...
+  devServer: {
+    compress: true,
+  },
+};
+```
+
+> gzip 可以压缩文件
