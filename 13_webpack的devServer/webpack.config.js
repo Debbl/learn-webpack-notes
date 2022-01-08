@@ -19,8 +19,9 @@ module.exports = {
     // },
     static: {
       directory: path.join(__dirname, './static'),
-      publicPath: '/static'
+      publicPath: '/static',
     },
+    port: 3000,
   },
   module: {
     rules: [
