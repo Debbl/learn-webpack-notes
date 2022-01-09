@@ -24,6 +24,11 @@ module.exports = {
     port: 3000,
     open: true,
     compress: true,
+    proxy: {
+      '/api': 'http://localhost:3000',
+      pathRewrite: { '^/api': '' },
+      secure: false,
+    },
   },
   module: {
     rules: [
