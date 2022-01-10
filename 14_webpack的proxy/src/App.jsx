@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/home.jsx';
+import About from './pages/about.jsx';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      message: "Hello React aaa!"
-    }
+      message: 'Hello React aaa!',
+    };
   }
 
   render() {
     return (
       <div>
+        <BrowserRouter>
+          <Link to='/home'>HOME</Link>
+          <Link to='/about'>ABOUT</Link>
+          <Routes>
+            <Route path='/home' element={<Home />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </BrowserRouter>
         <h2>{this.state.message}</h2>
       </div>
-    )
+    );
   }
 }
 

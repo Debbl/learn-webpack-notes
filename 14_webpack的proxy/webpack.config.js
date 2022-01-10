@@ -28,8 +28,12 @@ module.exports = {
       '/api': 'http://localhost:3000',
       pathRewrite: { '^/api': '' },
       secure: false,
+      changeOrigin: true,
     },
-    changeOrigin: true,
+    // historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/$/, to: 'views/landing.html' }],
+    },
   },
   module: {
     rules: [
