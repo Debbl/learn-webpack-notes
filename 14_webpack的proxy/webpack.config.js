@@ -35,6 +35,13 @@ module.exports = {
       rewrites: [{ from: /^\/$/, to: 'views/landing.html' }],
     },
   },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx', '.wasm'],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      pages: path.resolve(__dirname, './src/pages'),
+    },
+  },
   module: {
     rules: [
       {
