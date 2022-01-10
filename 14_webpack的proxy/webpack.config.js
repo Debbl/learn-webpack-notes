@@ -29,6 +29,7 @@ module.exports = {
       pathRewrite: { '^/api': '' },
       secure: false,
     },
+    changeOrigin: true,
   },
   module: {
     rules: [
