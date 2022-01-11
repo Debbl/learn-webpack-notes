@@ -39,7 +39,7 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.wasm'],
     alias: {
       '@': path.resolve(__dirname, './src'),
-      pages: path.resolve(__dirname, './src/pages'),
+      'pages': path.resolve(__dirname, './src/pages'),
     },
   },
   module: {
