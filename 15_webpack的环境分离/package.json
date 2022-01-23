@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "build2": "webpack --config ./config/webpack.common.js --env production",
+    "serve2": "webpack serve --config ./config/webpack.common.js --env development"
   },
   "author": "",
   "license": "ISC",
