@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      message: 'Hello React aaa!',
+      message: 'Hello React ccc!',
     };
   }
 

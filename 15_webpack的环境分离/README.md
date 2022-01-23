@@ -45,7 +45,7 @@ module.exports = function (env) {
 - context的作用是用于解析入口（entry point）和加载器（loader）：
 - 官方说法：默认是当前路径（默认是webpack的启动目录）
 
-> ./config/webpack.c
+> ./config/webpack.common.js
 
 ```js
 module.exports = function (env) {
@@ -64,4 +64,40 @@ module.exports = function (env) {
   };
 };
 ```
+
+## 配置文件分离
+
+- 路径 path.js
+
+> 解决 context 配置问题
+
+- babel.config.js
+- 插件 merge
+
+> babel.config.js
+
+```js
+const presets = [
+  '@babel/preset-env', //
+  '@babel/preset-react',
+];
+
+const plugins = [];
+
+console.log(process.env.NODE_ENV);
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (!isProduction) {
+  plugins.push(['react-refresh/babel']);
+} else {
+}
+
+module.exports = {
+  presets,
+  plugins,
+};
+
+```
+
+> 这个 process 是 Node 里的全局变量，相当于浏览器里的 window 和 document，这里在webpack.common.js 里给 process.env.NODE_ENV 赋值了。
 
