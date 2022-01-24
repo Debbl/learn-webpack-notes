@@ -164,3 +164,15 @@
   - 在webpack中，通过动态导入获取到一个对象； 
   - 真正导出的内容，在改对象的default属性中，所以我们需要做一个简单的解构；
 
+### optimization.chunkIds配置
+
+-  optimization.chunkIds配置用于告知webpack模块的id采用什么算法生成。 
+  - 有三个比较常见的值： 
+    - natural：按照数字的顺序使用id； 
+    - named：development下的默认值，一个可读的名称的id； 
+    - deterministic：确定性的，在不同的编译中不变的短数字id ü在webpack4中是没有这个值的； 
+  - 那个时候如果使用natural，那么在一些编译发生变化时，就会有问题；
+- 最佳实践： 
+  - 开发过程中，我们推荐使用named； 
+  - 打包过程中，我们推荐使用deterministic；
+

@@ -8,6 +8,7 @@ module.exports = {
         extractComments: false,
       }),
     ],
+    chunkIds: 'deterministic',
     splitChunks: {
       // async 异步导入代码
       // initial 同步导入代码
