@@ -1,1 +1,1 @@
-console.log("Hello Index!");
+"use strict";(self.webpackChunkwebpack_dev_server=self.webpackChunkwebpack_dev_server||[]).push([[826],{579:(e,l,o)=>{var n=o(974),s=o.n(n),c=o(76),r=o.n(c);console.log("Hello Index!"),console.log(s().join(["Hello","Index..."])),console.log(r()(),"Index")}},e=>{var l;l=579,e(e.s=l)}]);

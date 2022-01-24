@@ -8,8 +8,11 @@ const devConfig = require('./webpack.dev');
 
 const commonConfig = {
   entry: {
-    main: './src/main.js',
-    index: './src/index.js',
+    main: { import: './src/main.js', dependOn: 'shared' },
+    index: { import: './src/index.js', dependOn: 'shared' },
+    // lodash: 'lodash',
+    // dayjs: 'dayjs',
+    shared: ['lodash', 'dayjs']
   },
   output: {
     path: resolveApp('./build'),

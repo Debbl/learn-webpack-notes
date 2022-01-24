@@ -1,1 +1,1 @@
-console.log("Hello Webpack!");
+"use strict";(self.webpackChunkwebpack_dev_server=self.webpackChunkwebpack_dev_server||[]).push([[179],{939:(e,l,o)=>{var s=o(974),n=o.n(s),a=o(76),c=o.n(a);console.log("Hello Webpack!"),console.log(n().join(["Hello","Main"])),console.log(c()(),"Main")}},e=>{var l;l=939,e(e.s=l)}]);
