@@ -7,10 +7,14 @@ const prodConfig = require('./webpack.prod');
 const devConfig = require('./webpack.dev');
 
 const commonConfig = {
-  entry: './src/main.js',
+  entry: {
+    main: './src/main.js',
+    index: './src/index.js',
+  },
   output: {
     path: resolveApp('./build'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+    clean: true,
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.wasm'],
