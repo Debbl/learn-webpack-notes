@@ -7,3 +7,7 @@ import './bar_02';
 console.log('Hello Webpack!');
 console.log(_.join(['Hello', 'Main']));
 console.log(dayjs(), 'Main');
+
+import('./foo').then((res) => {
+  console.log(res);
+});
