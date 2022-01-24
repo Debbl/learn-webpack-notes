@@ -176,3 +176,32 @@
   - 开发过程中，我们推荐使用named； 
   - 打包过程中，我们推荐使用deterministic；
 
+### 动态导入的文件命名
+
+- 动态导入的文件命名： 
+
+  - 因为动态导入通常是一定会打包成独立的文件的，所以并不会再cacheGroups中进行配置； 
+  - 那么它的命名我们通常会在output中，通过 chunkFilename 属性来命名；
+
+  ```js
+    output: {
+      path: resolveApp('./build'),
+      filename: '[name].bundle.js',
+      clean: true,
+      chunkFilename: '[id].[name].chunk.js'
+    },
+  ```
+
+  - 但是，你会发现默认情况下我们获取到的 [name] 是和id的名称保持一致的 p如果我们希望修改name的值，可以通过magic comments（魔法注释）的方式；
+
+  ```js
+  import(/* webpackChunkName: "foo" */'./foo').then((res) => {
+    console.log(res);
+  });
+  import(/* webpackChunkName: "foo_02" */'./foo_02').then((res) => {
+    console.log(res);
+  });
+  ```
+
+  
+

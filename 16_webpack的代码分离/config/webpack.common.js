@@ -20,6 +20,7 @@ const commonConfig = {
     path: resolveApp('./build'),
     filename: '[name].bundle.js',
     clean: true,
+    chunkFilename: '[id].[name].chunk.js'
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.wasm'],
