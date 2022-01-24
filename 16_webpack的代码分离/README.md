@@ -52,3 +52,36 @@
     >   },
     > };
     > ```
+  
+    - SplitChunksPlugin
+  
+      - 另外一种分包的模式是splitChunk，它是使用SplitChunksPlugin来实现的： 
+        - 因为该插件webpack已经默认安装和集成，所以我们并不需要单独安装和直接使用该插件； 
+        - 只需要提供SplitChunksPlugin相关的配置信息即可；
+      - Webpack提供了SplitChunksPlugin默认的配置，我们也可以手动来修改它的配置： 
+        - 比如默认配置中，chunks仅仅针对于异步（async）请求，我们可以设置为initial或者all；
+  
+      ```js
+      const TerserPlugin = require('terser-webpack-plugin');
+      
+      module.exports = {
+        mode: 'production',
+        optimization: {
+          minimizer: [
+            new TerserPlugin({
+              extractComments: false,
+            }),
+          ],
+          splitChunks: {
+            // async 异步导入代码
+            // initial 同步导入代码
+            // all 异步/同步导入代码  (常用)
+            chunks: 'all',
+          },
+        },
+      };
+      ```
+  
+      > 952.bundle.js 为打包的代码
+  
+      ![](./images/01.png)
