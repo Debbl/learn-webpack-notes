@@ -203,5 +203,33 @@
   });
   ```
 
-  
+
+## 懒加载的运用
+
+动态import使用最多的一个场景是懒加载（比如路由懒加载）：
+
+> element.js
+
+```js
+const element = document.createElement('div');
+
+element.innerHTML = 'Hello Element';
+
+export default element;
+```
+
+> index.js 按钮点击加载组件
+
+```js
+const button = document.createElement('button');
+button.innerHTML = '加载元素';
+button.addEventListener('click', () => {
+  import(/* webpackChunkName: 'element' */'./element').then(({default: element}) => {
+    console.log(element);
+    document.body.appendChild(element);
+  });
+});
+
+document.body.appendChild(button);
+```
 

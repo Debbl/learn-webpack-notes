@@ -9,3 +9,15 @@ console.log(_.join(['Hello', 'Index...']));
 console.log(dayjs(), 'Index');
 
 // import('lodash').then((res) => {});
+
+// 按钮点击 懒加载组件
+const button = document.createElement('button');
+button.innerHTML = '加载元素';
+button.addEventListener('click', () => {
+  import(/* webpackChunkName: 'element' */'./element').then(({default: element}) => {
+    console.log(element);
+    document.body.appendChild(element);
+  });
+});
+
+document.body.appendChild(button);
