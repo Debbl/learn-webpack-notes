@@ -14,7 +14,11 @@ console.log(dayjs(), 'Index');
 const button = document.createElement('button');
 button.innerHTML = '加载元素';
 button.addEventListener('click', () => {
-  import(/* webpackChunkName: 'element' */'./element').then(({default: element}) => {
+  import(
+    /* webpackChunkName: 'element' */
+    // /* webpackPrefetch: true */
+    /* webpackPreload: true */
+    './element').then(({default: element}) => {
     console.log(element);
     document.body.appendChild(element);
   });
