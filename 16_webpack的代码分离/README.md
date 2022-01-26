@@ -245,3 +245,32 @@ document.body.appendChild(button);
   - preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开 始加载。
   - preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。 
   - preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。
+
+## optimization. runtimeChunk配置
+
+- 配置runtime相关的代码是否抽取到一个单独的chunk中： 
+  - runtime相关的代码指的是在运行环境中，对模块进行解析、加载、模块信息相关的代码； 
+  - 比如我们的component、bar两个通过import函数相关的代码加载，就是通过runtime代码完成的；
+- 抽离出来后，有利于浏览器缓存的策略： 
+  - 比如我们修改了业务代码（main），那么runtime和component、bar的chunk是不需要重新加载的； 
+  - 比如我们修改了component、bar的代码，那么main中的代码是不需要重新加载的；
+- 设置的值： 
+  - true/multiple：针对每个入口打包一个runtime文件； 
+  - single：打包一个runtime文件； 
+  - 对象：name属性决定runtimeChunk的名称；
+
+```js
+    // true || multiple || single
+    // runtimeChunk: 'single',
+
+    // runtimeChunk: {
+    //   name: "runtime"
+    // },
+
+    runtimeChunk: {
+      name: function(entrypoint) {
+        return `runtime-${entrypoint.name}`;
+      }
+    },
+```
+

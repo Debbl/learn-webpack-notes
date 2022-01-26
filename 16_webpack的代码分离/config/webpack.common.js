@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { merge } = require('webpack-merge');
 
+const TerserPlugin = require('terser-webpack-plugin');
 const resolveApp = require('./path');
 const prodConfig = require('./webpack.prod');
 const devConfig = require('./webpack.dev');
@@ -21,6 +22,37 @@ const commonConfig = {
     filename: '[name].bundle.js',
     clean: true,
     chunkFilename: '[id].[name].chunk.js'
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+    // true || multiple || single
+    // runtimeChunk: 'single',
+
+    // runtimeChunk: {
+    //   name: "runtime"
+    // },
+
+    runtimeChunk: {
+      name: function(entrypoint) {
+        return `runtime-${entrypoint.name}`;
+      }
+    },
+    chunkIds: 'deterministic',
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 1,
+      cacheGroups: {
+        defaultVenders: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: '[id].venders.js',
+          priority: -10, // 优先级
+        }
+      },
+    },
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.wasm'],
