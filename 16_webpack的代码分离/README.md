@@ -246,6 +246,14 @@ document.body.appendChild(button);
   - preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。 
   - preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。
 
+> Prefetch
+
+![](./images/02.png)
+
+> Preloade
+
+![](./images/03.png)
+
 ## optimization. runtimeChunk配置
 
 - 配置runtime相关的代码是否抽取到一个单独的chunk中： 
